@@ -141,7 +141,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Product_ManageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HomeIndex\IndexData.cs" />
+    <Compile Include="Controllers\Top\TopData.cs" />
+    <Compile Include="Controllers\WebControlController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -150,15 +156,73 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\ddsmoothmenu.css" />
+    <Content Include="Content\MagicZoom.css" />
+    <Content Include="Content\nivo-slider.css" />
+    <Content Include="Content\ShopShow.css" />
+    <Content Include="Content\slimbox2.css" />
+    <Content Include="Content\templatemo_style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\arrows.png" />
+    <Content Include="images\btn_Add.png" />
+    <Content Include="images\btn_Cancel.jpg" />
+    <Content Include="images\btn_Collection.png" />
+    <Content Include="images\btn_Login.jpg" />
+    <Content Include="images\btn_Registration.jpg" />
+    <Content Include="images\btn_Return.jpg" />
+    <Content Include="images\btn_Tijiao.jpg" />
+    <Content Include="images\btn_Update.jpg" />
+    <Content Include="images\bullets.png" />
+    <Content Include="images\closelabel.gif" />
+    <Content Include="images\loading.gif" />
+    <Content Include="images\nextlabel.gif" />
+    <Content Include="images\paypal.gif" />
+    <Content Include="images\prevlabel.gif" />
+    <Content Include="images\product\01.jpg" />
+    <Content Include="images\product\02.jpg" />
+    <Content Include="images\product\03.jpg" />
+    <Content Include="images\product\04.jpg" />
+    <Content Include="images\product\05.jpg" />
+    <Content Include="images\product\06.jpg" />
+    <Content Include="images\product\07.jpg" />
+    <Content Include="images\product\08.jpg" />
+    <Content Include="images\product\09.jpg" />
+    <Content Include="images\product\10.jpg" />
+    <Content Include="images\product\10_l.jpg" />
+    <Content Include="images\remove_x.gif" />
+    <Content Include="images\slider\01.jpg" />
+    <Content Include="images\slider\02.jpg" />
+    <Content Include="images\slider\03.jpg" />
+    <Content Include="images\slider\04.jpg" />
+    <Content Include="images\templatemo_addtocart.png" />
+    <Content Include="images\templatemo_body.jpg" />
+    <Content Include="images\templatemo_body_top.jpg" />
+    <Content Include="images\templatemo_detail.png" />
+    <Content Include="images\templatemo_footer.png" />
+    <Content Include="images\templatemo_header_bg.jpg" />
+    <Content Include="images\templatemo_header_bg.png" />
+    <Content Include="images\templatemo_image_01.jpg" />
+    <Content Include="images\templatemo_list.png" />
+    <Content Include="images\templatemo_logo.png" />
+    <Content Include="images\templatemo_main_bg.png" />
+    <Content Include="images\templatemo_menubar.png" />
+    <Content Include="images\templatemo_search_bg.png" />
+    <Content Include="images\templatemo_sidebar_header.png" />
+    <Content Include="images\templatemo_sidebar_header_1.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Top.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Left.cshtml" />
+    <Content Include="Areas\Admin\Views\Product_Manage\Product_Manage.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Down.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -167,6 +231,13 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\ddsmoothmenu.js" />
+    <Content Include="Scripts\js\jquery-1.4.3.min.js" />
+    <Content Include="Scripts\js\jquery.min.js" />
+    <Content Include="Scripts\js\jquery.nivo.slider.pack.js" />
+    <Content Include="Scripts\js\MagicZoom.js" />
+    <Content Include="Scripts\js\ShopShow.js" />
+    <Content Include="Scripts\js\slimbox2.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -184,9 +255,13 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\WebControl\Top.cshtml" />
+    <Content Include="Views\WebControl\Foot.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -203,6 +278,28 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{38d7aa58-c95b-449b-86c6-a8073a56e11f}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{9fe00521-3a8b-42b1-814e-585e99407b2e}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DBUtility\DBUtility.csproj">
+      <Project>{0988c62e-247f-471f-a183-db509c7a3839}</Project>
+      <Name>DBUtility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HtmlHelper\HtmlHelper.csproj">
+      <Project>{313d6e34-37f8-46c4-92e8-653807a1d82e}</Project>
+      <Name>HtmlHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{53995dbb-9836-4647-ad22-865884fdeb9e}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,147 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Product_Manage</title>
+    <link rel="stylesheet" type="text/css" href="../css/forms.css" />
+    <link href="../style/style.css" rel="stylesheet" type="text/css" />
+    <script src="../js/common.js" type="text/javascript"></script>
+    <script src="../js/jquery.js" type="text/javascript"></script>
+</head>
+<body topmargin="0px" bottommargin="0px" leftmargin="0px" rightmargin="0px" onload="controlInputNumber()">
+    <form id="form1" runat="server">
+        <div class="forms1">
+            <div class="forms2">
+                <span>
+                    商品管理
+                </span>
+                <div class="forms4">
+                    <a href="Product_Add.aspx" class="forms4_1">商品添加</a>
+                    <asp:Button ID="btndel" runat="server" Text="批量删除" OnClick="btndel_Click" OnClientClick="getCheckedDelIds();" style="cursor:pointer" onmouseout="this.style.backgroundImage='url(../images/other/blue1.png)'" onmouseover="this.style.backgroundImage='url(../images/other/blue2.png)'" />
+                </div>
+            </div>
+            <div style="border:1px solid #FFFFFF">
+                <table class="forms3" width="100%" height="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="forms5_1" nowrap="nowrap" align="left">
+                            <span style="color:Black">商品名称：</span>
+                            <asp:TextBox ID="txtProductName" runat="server"></asp:TextBox>
+                            &emsp;
+                            <span style="color:Black">商品类型：</span>
+                            <asp:DropDownList ID="ddlProductType" runat="server"></asp:DropDownList>
+                            &emsp;
+                            <asp:ImageButton ID="btnquery" runat="server" Text="" OnClick="btnquery_Click" ImageUrl="../images/blue/search.jpg" Height="21px" Width="58px" style="vertical-align:middle" />
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="forms5_2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>
+
+                            <table cellpadding="0" cellspacing="0" width="100%" style="margin-top:10px">
+                                <tr>
+                                    <td class="forms6_1" style="width:28px" align="center">
+                                        <input id="chkChooseauditAll" type="checkbox" onclick="ChooseAll(this)" />
+                                    </td>
+                                    <td class="forms6_1" align="left">
+                                        <span style="color:Black">商品名称</span>
+                                    </td>
+                                    <td class="forms6_1" align="left">
+                                        <span style="color:Black">商品类型</span>
+                                    </td>
+                                    <td class="forms6_1" align="left">
+                                        <span style="color:Black">描述</span>
+                                    </td>
+                                    <td class="forms6_1" align="left">
+                                        <span style="color:Black">品牌</span>
+                                    </td>
+                                    <td class="forms6_1" align="left">
+                                        <span style="color:Black">规格</span>
+                                    </td>
+                                    <td class="forms6_1" align="left">
+                                        <span style="color:Black">市场价格</span>
+                                    </td>
+                                    <td class="forms6_1" align="left">
+                                        <span style="color:Black">本网站价格</span>
+                                    </td>
+                                    <td class="forms6_1" align="left">
+                                        <span style="color:Black">创建时间</span>
+                                    </td>
+                                    <td class="forms6_2" align="left" width="100px">
+                                        <span style="color:Black">操作</span>
+                                    </td>
+                                </tr>
+                                <asp:Repeater runat="server" ID="rptProduct" OnItemCommand="rptProduct_ItemCommand">
+                                    <ItemTemplate>
+                                        <tr onmouseover="this.style.background='#F3FBCA'" onmouseout="this.style.background='#ffffff';">
+                                            <td class="forms6_3" style="width:28px" align="center">
+                                                <input type="checkbox" name="chkChooseaudit" value="<%#Eval(" ID")%>" onclick="ChooseItemClick(this);" />
+                                            </td>
+                                            <td class="forms6_3" align="left">
+                                                <span style="color:Black"><%# publicHandle.GetSubstring(Eval("ProductName").ToString(),10,"...")%></span>
+                                            </td>
+                                            <td class="forms6_3" align="left">
+                                                <span style="color:Black"><%# getProductTypeName(Eval("ProductTypeId").ToString())%></span>
+                                            </td>
+                                            <td class="forms6_3" align="left">
+                                                <span style="color:Black"><%# publicHandle.GetSubstring(Eval("Description").ToString(), 10, "...")%></span>
+                                            </td>
+                                            <td class="forms6_3" align="left">
+                                                <span style="color:Black"><%# getBrandName(Eval("Brand").ToString())%></span>
+                                            </td>
+                                            <td class="forms6_3" align="left">
+                                                <span style="color:Black"><%# Eval("Spec")%></span>
+                                            </td>
+                                            <td class="forms6_3" align="left">
+                                                <span style="color:Black"><%# Eval("MarketPrice")%></span>
+                                            </td>
+                                            <td class="forms6_3" align="left">
+                                                <span style="color:Black"><%# Eval("WebsitePrice")%></span>
+                                            </td>
+                                            <td class="forms6_3" align="left">
+                                                <span style="color:Black"><%# DateTime.Parse(Eval("CreateDate").ToString()).ToString("yyyy-MM-dd HH:mm:ss")%></span>
+                                            </td>
+                                            <td class="forms6_4" align="left">
+                                                <a href="Product_Update.aspx?id=<%#  Eval(" ID") %>">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <asp:LinkButton Text="删除" runat="server" ID="linkbtnDelete" CommandName="Del" style="cursor:hand;" CommandArgument='<%# Eval("ID") %>' OnClientClick="javascript:return confirm('您确实要删除吗！')" />
+                                            </td>
+                                        </tr>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </table>
+                            <div id="data_page_div" runat="server">
+                                <div>
+                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                        <tr>
+                                            <td>
+                                                <asp:HiddenField ID="hidBatchDelId" runat="server" />
+                                                <asp:HiddenField ID="hidBatchReviewId" runat="server" />
+                                            </td>
+                                            <td runat="server" id="trRecord">
+                                                <nobr>
+                                                    <webdiyer:AspNetPager ID="pager" PageSize="10" runat="server" CssClass="_tab_page_div" UrlPaging="True" FirstPageText="【首页】"
+                                                                          LastPageText="【尾页】" NextPageText="【下一页】" NumericButtonCount="5" PrevPageText="【上一页】"
+                                                                          CustomInfoClass="_tab_pager_div1" ShowCustomInfoSection="left" EnableUrlRewriting="false" PageIndexBoxClass="page_box_ipt" SubmitButtonClass="page_btn_go" SubmitButtonText="" ShowInputBox="Never">
+                                                    </webdiyer:AspNetPager>
+                                                </nobr>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

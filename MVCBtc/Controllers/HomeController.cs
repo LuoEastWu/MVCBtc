@@ -10,6 +10,7 @@ namespace MVCBtc.Controllers
     {
         public ActionResult Index()
         {
+            ViewData["AdvertList"] = MVCBtc.Controllers.HomeIndex.IndexData.BindAd();
             return View();
         }
 

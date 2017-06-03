@@ -1,31 +1,75 @@
 ﻿@{
+   
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<form runat="server" id="form2">
+        <div id="templatemo_body_wrapper">
+            <div id="templatemo_wrapper">
+                <uc1:Top runat="server" ID="uctop" />
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+                <div class="copyrights">Collect from <a href="http://sc.putaojiayuan.com/" title=""></a></div>
+
+                <div id="templatemo_main">
+                    <uc3:Left runat="server" ID="ucLeft" />
+
+                    <div id="content" class="float_r">
+                        <div id="slider-wrapper">
+                            <div id="slider" class="nivoSlider">
+                                @if (ViewData["AdvertList"] != null)
+                                {
+                                    foreach (var AdvertList in (List<JY.Model.Advert>)ViewData["AdvertList"])
+                                    {
+                                        <a href="@AdvertList.AdvertUrl" target="_blank">
+                                            <img src="Admin/Upfile/@AdvertList.AdvertPic" width="680px" height="300px" alt="/@AdvertList.AdvertName" title="@AdvertList.AdvertName" />
+                                        </a>
+                                    }
+
+                                }
+
+
+
+                            </div>
+
+                            <!--
+                            <div id="htmlcaption" class="nivo-html-caption">
+                                <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
+                            </div>
+                            -->
+                        </div>
+                        <script type="text/javascript" src="js/jquery-1.4.3.min.js"></script>
+                        <script type="text/javascript" src="js/jquery.nivo.slider.pack.js"></script>
+                        <script type="text/javascript">
+                            $(window).load(function () {
+                                $('#slider').nivoSlider();
+                            });
+                        </script>
+                        <h1>新品上市</h1>
+                        <asp:Repeater ID="rptProductHot" runat="server">
+                            <ItemTemplate>
+                                <div class="product_box">
+                                    <h3 style="text-align: center"><%# publicHandle.GetSubstring(Eval("ProductName").ToString(), 16, "...")%></h3>
+                                    <a href='Productdetail.aspx?id=<%#Eval("Id") %>'>
+                                        <img src="Admin/Upfile/<%#Eval(" ProductPic") %>" alt="Shoes 1" style="width: 200px; height: 150px;" />
+                                    </a>
+                                    <p class="product_price"><s>市场价：￥ <%#Eval("MarketPrice")%></s></p>
+                                    <p class="product_price">本网站价：￥ <%#Eval("WebsitePrice")%></p>
+                                    <a href='Shoppingcart.aspx?Productid=<%#Eval("Id") %>&num=1' class="addtocart"></a>
+                                    <a href='Productdetail.aspx?id=<%#Eval("Id") %>' class="detail"></a>
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                        <div class="cleaner"></div>
+
+                    </div>
+                    <div class="cleaner"></div>
+
+                </div>
+                <!-- END of templatemo_main -->
+
+                <uc2:Foot runat="server" ID="ucFoot" />
+            </div>
+            <!-- END of templatemo_wrapper -->
+        </div>
+        <!-- END of templatemo_body_wrapper -->
+</form>
