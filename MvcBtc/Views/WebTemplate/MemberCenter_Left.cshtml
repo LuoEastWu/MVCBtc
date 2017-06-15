@@ -1,0 +1,64 @@
+﻿
+
+
+<!--<meta name="keywords" content="shoes store, free template, ecommerce, online shop, website templates, CSS, HTML" />
+<meta name="description" content="Shoes Store is a free ecommerce template provided " />
+<link href="templatemo_style.css" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" href="nivo-slider.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" type="text/css" href="css/ddsmoothmenu.css" />
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/ddsmoothmenu.js">
+
+</script>
+
+<script type="text/javascript">
+
+ddsmoothmenu.init({
+    mainmenuid: "top_nav", //menu DIV id
+    orientation: 'h', //Horizontal or vertical menu: Set to "h" or "v"
+    classname: 'ddsmoothmenu', //class added to menu's outer DIV
+    //customtheme: ["#1c5a80", "#18374a"],
+    contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
+})
+
+</script>-->
+
+
+<div id="sidebar" class="float_l">
+    <div class="sidebar_box">
+        <span class="bottom"></span>
+        <h3>会员中心</h3>
+        <div class="content">
+            <ul class="sidebar_list">
+                <li class="first"><a href="#"></a></li>
+                <li><a href="MemberInfo.aspx">我的基本信息</a></li>
+                <li><a href="PasswordUpdate.aspx">密码修改</a></li>
+                <li><a href="OrderForm.aspx">我的订单</a></li>
+                <li><a href="Address.aspx">我的收货地址</a></li>
+                <li><a href="Collection.aspx">我的收藏</a></li>
+                <li><a href="Review.aspx">我的评论</a></li>
+                <li class="last"><a href="#"></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="sidebar_box">
+        <span class="bottom"></span>
+        <h3>热销产品 </h3>
+        <div class="content">
+            <asp:Repeater ID="rptProductHot" runat="server">
+                <itemtemplate>
+                    <div class="bs_box">
+                        <a href='../Productdetail.aspx?id=<%#Eval("Id") %>'><img src="../Admin/Upfile/<%#Eval(" productpic") %>" alt="Shoes 1" style="width:57px; height:59px;"/></a>
+                        <h4><a href='../Productdetail.aspx?id=<%#Eval("Id") %>'><%# publicHandle.GetSubstring(Eval("ProductName").ToString(), 10, "...")%></a></h4>
+                        <p class="price">本网站价：￥ <%#Eval("WebsitePrice")%></p>
+                        <div class="cleaner"></div>
+                    </div>
+                </itemtemplate>
+            </asp:Repeater>
+        </div>
+    </div>
+</div>

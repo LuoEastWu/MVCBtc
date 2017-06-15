@@ -18,7 +18,17 @@
                 <div class="float-right">
                     <section id="login">
                         @Html.Partial("_LoginPartial")
+
+                     
+
+                        @{
+                            Html.RenderPartial("~/Views/WebTemplate/Top.cshtml", new { parm = "my" });
+    }
                     </section>
+                 
+                  
+                    
+                    
                     <nav>
                         <ul id="menu">
                             <li>@Html.ActionLink("主页", "Index", "Home")</li>

@@ -10,13 +10,18 @@ namespace MvcBtc.Controllers
     {
         //
         // GET: /WebTemplate/
-
+    
         public ActionResult Top()
         {
+            return PartialView();
+        }
+        public ActionResult Left()
+        {
             return View();
         }
 
-        public ActionResult MemberCenter_Top()
+
+        public ActionResult Foot()
         {
             return View();
         }
@@ -26,10 +31,18 @@ namespace MvcBtc.Controllers
             return View();
         }
 
-        public ActionResult MemberCenter_Top()
+        public ActionResult MemberCenter_Left()
         {
             return View();
         }
+
+        public ActionResult MemberCenter_Foot()
+        {
+            return View();
+        }
+
+     
+
 
     }
 }

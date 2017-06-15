@@ -1,45 +1,89 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
-@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
-            <p>
-                To learn more about ASP.NET MVC visit
-                <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
-                The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET MVC.
-                If you have any questions about ASP.NET MVC visit
-                <a href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
-            </p>
-        </div>
-    </section>
-}
-<h3>We suggest the following:</h3>
-<ol class="round">
-    <li class="one">
-        <h5>Getting Started</h5>
-        ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-        enables a clean separation of concerns and that gives you full control over markup
-        for enjoyable, agile development. ASP.NET MVC includes many features that enable
-        fast, TDD-friendly development for creating sophisticated applications that use
-        the latest web standards.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245151">Learn more…</a>
-    </li>
+﻿
 
-    <li class="two">
-        <h5>Add NuGet packages and jump-start your coding</h5>
-        NuGet makes it easy to install and update free libraries and tools.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245153">Learn more…</a>
-    </li>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>主页-B2C电子商务网站</title>
+    <meta name="keywords" content="网上鞋店，手机数码，护肤品，..." />
+    <meta name="description" content="BtoC购物网站为您提供最实惠的商品..." />
 
-    <li class="three">
-        <h5>Find Web Hosting</h5>
-        You can easily find a web hosting company that offers the right mix of features
-        and price for your applications.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more…</a>
-    </li>
-</ol>
+</head>
+
+<body>
+
+    <form runat="server" id="form2">
+        <center>
+
+            <div id="templatemo_body_wrapper">
+                <div id="templatemo_wrapper">
+                    <uc1:Top runat="server" ID="uctop" />
+
+                    <div class="copyrights">Collect from <a href="http://sc.putaojiayuan.com/" title=""></a></div>
+
+                    <div id="templatemo_main">
+                        <uc3:Left runat="server" ID="ucLeft" />
+
+                        <div id="content" class="float_r">
+                            <div id="slider-wrapper">
+                                <div id="slider" class="nivoSlider">
+
+                                    <asp:Repeater runat="server" ID="rptAd">
+                                        <itemtemplate>
+                                            <a href="<%# Eval(" adverturl") %>
+                                                " target="_blank">
+                                                <img src="Admin/Upfile/<%# Eval(" advertpic") %>" width="680px" height="300px" alt="<%# Eval("AdvertName") %>" title="<%# Eval("AdvertName") %>" />
+                                            </a>
+                                        </itemtemplate>
+                                    </asp:Repeater>
+
+
+                                </div>
+
+                                <!--
+                                <div id="htmlcaption" class="nivo-html-caption">
+                                    <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
+                                </div>
+                                -->
+                            </div>
+                            <script type="text/javascript" src="js/jquery-1.4.3.min.js"></script>
+                            <script type="text/javascript" src="js/jquery.nivo.slider.pack.js"></script>
+                            <script type="text/javascript">
+                                $(window).load(function () {
+                                    $('#slider').nivoSlider();
+                                });
+                            </script>
+                            <h1>新品上市</h1>
+                            <asp:Repeater ID="rptProductHot" runat="server">
+                                <itemtemplate>
+                                    <div class="product_box">
+                                        <h3 style="text-align: center"><%# publicHandle.GetSubstring(Eval("ProductName").ToString(), 16, "...")%></h3>
+                                        <a href='Productdetail.aspx?id=<%#Eval("Id") %>'>
+                                            <img src="Admin/Upfile/<%#Eval(" productpic") %>" alt="Shoes 1" style="width: 200px; height: 150px;" />
+                                        </a>
+                                        <p class="product_price"><s>市场价：￥ <%#Eval("MarketPrice")%></s></p>
+                                        <p class="product_price">本网站价：￥ <%#Eval("WebsitePrice")%></p>
+                                        <a href='Shoppingcart.aspx?Productid=<%#Eval("Id") %>&num=1' class="addtocart"></a>
+                                        <a href='Productdetail.aspx?id=<%#Eval("Id") %>' class="detail"></a>
+                                    </div>
+                                </itemtemplate>
+                            </asp:Repeater>
+                            <div class="cleaner"></div>
+
+                        </div>
+                        <div class="cleaner"></div>
+
+                    </div>
+                    <!-- END of templatemo_main -->
+
+                    <uc2:Foot runat="server" ID="ucFoot" />
+                </div>
+                <!-- END of templatemo_wrapper -->
+            </div>
+            <!-- END of templatemo_body_wrapper -->
+
+        </center>
+
+    </form>
+</body>
+</html>
