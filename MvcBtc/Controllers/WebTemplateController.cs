@@ -26,5 +26,10 @@ namespace MvcBtc.Controllers
             return View();
         }
 
+        public ActionResult MemberCenter_Top()
+        {
+            return View();
+        }
+
     }
 }
