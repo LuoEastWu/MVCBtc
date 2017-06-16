@@ -1,11 +1,4 @@
-﻿<link href="css/templatemo_style.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="css/nivo-slider.css" type="text/css" media="screen" />
-<link rel="stylesheet" type="text/css" href="css/ddsmoothmenu.css" />
-
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/ddsmoothmenu.js">
-
-</script>
+﻿
 
 <script type="text/javascript">
 
@@ -39,38 +32,41 @@
 <div id="templatemo_menubar">
 
     <div id="top_nav" class="ddsmoothmenu">
-        <ul>
-            <li><a href="Index.aspx" class="selected">主页</a></li>
-            <asp:Repeater ID="rptProductType" runat="server" OnItemDataBound="rptProductType_ItemDataBound">
-                <itemtemplate>
-                    <li>
-                        <a href='Products.aspx?ProductTypeId=<%# Eval("Id")%>'><%#Eval("TypeName")%></a>
-                        <ul>
-                            <asp:Repeater ID="rptProductChildType" runat="server">
-                                <itemtemplate>
-                                    <li><a href='Products.aspx?ProductTypeId=<%#  Eval("Id") %>'><%#Eval("TypeName")%></a></li>
-                                </itemtemplate>
-                            </asp:Repeater>
-                        </ul>
-                    </li>
-                </itemtemplate>
-            </asp:Repeater>
+        <nav>
+            <ul>
+                <li><a href="Index.aspx" class="selected">主页</a></li>
+                @if (ViewData["ProductTypeList"] != null)
+                {
+                    foreach (var ProductTypeList in (List<JY.Model.ProductType>)ViewData["ProductTypeList"])
+                    {
+                        <li>
+                            <a href='Products.aspx?ProductTypeId=@ProductTypeList.ID'>@ProductTypeList.TypeName</a>
+                            <ul>
+                                @foreach (var rptProductType in MvcBtc.Controllers.WebTemplateController.rptProductType(ProductTypeList.ID))
+                                {
+                                    <li><a href='Products.aspx?ProductTypeId=@rptProductType.ID'>@rptProductType.TypeName</a></li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                }
 
-            <asp:Repeater ID="rptInformationType" runat="server" OnItemDataBound="rptInformationType_ItemDataBound">
-                <itemtemplate>
-                    <li>
-                        <a href='Information.aspx?InformationTypeId=<%#  Eval("Id") %>'><%#Eval("TypeName")%></a>
-                        <ul>
-                            <asp:Repeater ID="rptInformationChildType" runat="server">
-                                <itemtemplate>
-                                    <li><a href='Information.aspx?InformationTypeId=<%#  Eval("Id") %>'><%#Eval("TypeName")%></a></li>
-                                </itemtemplate>
-                            </asp:Repeater>
-                        </ul>
-                    </li>
-                </itemtemplate>
-            </asp:Repeater>
-        </ul>
+                <asp:Repeater ID="rptInformationType" runat="server" OnItemDataBound="rptInformationType_ItemDataBound">
+                    <itemtemplate>
+                        <li>
+                            <a href='Information.aspx?InformationTypeId=<%#  Eval("Id") %>'><%#Eval("TypeName")%></a>
+                            <ul>
+                                <asp:Repeater ID="rptInformationChildType" runat="server">
+                                    <itemtemplate>
+                                        <li><a href='Information.aspx?InformationTypeId=<%#  Eval("Id") %>'><%#Eval("TypeName")%></a></li>
+                                    </itemtemplate>
+                                </asp:Repeater>
+                            </ul>
+                        </li>
+                    </itemtemplate>
+                </asp:Repeater>
+            </ul>
+        </nav>
         <br style="clear: left" />
     </div> <!-- end of ddsmoothmenu -->
 

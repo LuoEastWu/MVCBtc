@@ -1,89 +1,55 @@
-﻿
+﻿<div id="templatemo_main">
+    @{Html.RenderAction("Left", "WebTemplate");}
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>主页-B2C电子商务网站</title>
-    <meta name="keywords" content="网上鞋店，手机数码，护肤品，..." />
-    <meta name="description" content="BtoC购物网站为您提供最实惠的商品..." />
+    <div id="content" class="float_r">
+        <div id="slider-wrapper">
+            <div id="slider" class="nivoSlider">
 
-</head>
-
-<body>
-
-    <form runat="server" id="form2">
-        <center>
-
-            <div id="templatemo_body_wrapper">
-                <div id="templatemo_wrapper">
-                    <uc1:Top runat="server" ID="uctop" />
-
-                    <div class="copyrights">Collect from <a href="http://sc.putaojiayuan.com/" title=""></a></div>
-
-                    <div id="templatemo_main">
-                        <uc3:Left runat="server" ID="ucLeft" />
-
-                        <div id="content" class="float_r">
-                            <div id="slider-wrapper">
-                                <div id="slider" class="nivoSlider">
-
-                                    <asp:Repeater runat="server" ID="rptAd">
-                                        <itemtemplate>
-                                            <a href="<%# Eval(" adverturl") %>
-                                                " target="_blank">
-                                                <img src="Admin/Upfile/<%# Eval(" advertpic") %>" width="680px" height="300px" alt="<%# Eval("AdvertName") %>" title="<%# Eval("AdvertName") %>" />
-                                            </a>
-                                        </itemtemplate>
-                                    </asp:Repeater>
-
-
-                                </div>
-
-                                <!--
-                                <div id="htmlcaption" class="nivo-html-caption">
-                                    <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
-                                </div>
-                                -->
-                            </div>
-                            <script type="text/javascript" src="js/jquery-1.4.3.min.js"></script>
-                            <script type="text/javascript" src="js/jquery.nivo.slider.pack.js"></script>
-                            <script type="text/javascript">
-                                $(window).load(function () {
-                                    $('#slider').nivoSlider();
-                                });
-                            </script>
-                            <h1>新品上市</h1>
-                            <asp:Repeater ID="rptProductHot" runat="server">
-                                <itemtemplate>
-                                    <div class="product_box">
-                                        <h3 style="text-align: center"><%# publicHandle.GetSubstring(Eval("ProductName").ToString(), 16, "...")%></h3>
-                                        <a href='Productdetail.aspx?id=<%#Eval("Id") %>'>
-                                            <img src="Admin/Upfile/<%#Eval(" productpic") %>" alt="Shoes 1" style="width: 200px; height: 150px;" />
-                                        </a>
-                                        <p class="product_price"><s>市场价：￥ <%#Eval("MarketPrice")%></s></p>
-                                        <p class="product_price">本网站价：￥ <%#Eval("WebsitePrice")%></p>
-                                        <a href='Shoppingcart.aspx?Productid=<%#Eval("Id") %>&num=1' class="addtocart"></a>
-                                        <a href='Productdetail.aspx?id=<%#Eval("Id") %>' class="detail"></a>
-                                    </div>
-                                </itemtemplate>
-                            </asp:Repeater>
-                            <div class="cleaner"></div>
-
-                        </div>
-                        <div class="cleaner"></div>
-
-                    </div>
-                    <!-- END of templatemo_main -->
-
-                    <uc2:Foot runat="server" ID="ucFoot" />
-                </div>
-                <!-- END of templatemo_wrapper -->
+                <asp:Repeater runat="server" ID="rptAd">
+                    <itemtemplate>
+                        <a href="<%# Eval(" adverturl")=adverturl") %=%>
+                            " target="_blank">
+                            <img src="Admin/Upfile/<%# Eval(" advertpic")=advertpic") %=% />" width="680px" height="300px" alt="<%# Eval("AdvertName") %>" title="<%# Eval("AdvertName") %>" />
+                        </a>
+                    </itemtemplate>
+                </asp:Repeater>
             </div>
-            <!-- END of templatemo_body_wrapper -->
 
-        </center>
+            <!--
+            <div id="htmlcaption" class="nivo-html-caption">
+                <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
+            </div>
+            -->
+        </div>
 
-    </form>
-</body>
-</html>
+        @Scripts.Render("~/Scripts/js/jquery-1.4.3.min.js")
+        @Scripts.Render("~/Scripts/js/jquery.nivo.slider.pack.js")
+        <script type="text/javascript">
+            $(window).load(function () {
+                $('#slider').nivoSlider();
+            });
+        </script>
+        <h1>新品上市</h1>
+        <asp:Repeater ID="rptProductHot" runat="server">
+            <itemtemplate>
+                <div class="product_box">
+                    <h3 style="text-align: center"><%# publicHandle.GetSubstring(Eval("ProductName").ToString(), 16, "...")%></h3>
+                    <a href='Productdetail.aspx?id=<%#Eval("Id") %>'>
+                        <img src="Admin/Upfile/<%#Eval(" productpic")=productpic") %=% />" alt="Shoes 1" style="width: 200px; height: 150px;" />
+                    </a>
+                    <p class="product_price"><s>市场价：￥ <%#Eval("MarketPrice")%></s></p>
+                    <p class="product_price">本网站价：￥ <%#Eval("WebsitePrice")%></p>
+                    <a href='Shoppingcart.aspx?Productid=<%#Eval("Id") %>&num=1' class="addtocart"></a>
+                    <a href='Productdetail.aspx?id=<%#Eval("Id") %>' class="detail"></a>
+                </div>
+            </itemtemplate>
+        </asp:Repeater>
+        <div class="cleaner"></div>
+
+    </div>
+    <div class="cleaner"></div>
+
+</div>
+
+
+

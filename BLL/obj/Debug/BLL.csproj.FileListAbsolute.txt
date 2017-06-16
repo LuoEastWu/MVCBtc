@@ -50,3 +50,16 @@ F:\CSharpCode\BtoCgwwz5\BLL\bin\Debug\JY.DBUtility.pdb
 F:\CSharpCode\BtoCgwwz5\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
 F:\CSharpCode\BtoCgwwz5\BLL\obj\Debug\JY.BLL.dll
 F:\CSharpCode\BtoCgwwz5\BLL\obj\Debug\JY.BLL.pdb
+F:\CSharpCode\GitHub\MvcBtc\BLL\bin\Debug\JY.BLL.dll
+F:\CSharpCode\GitHub\MvcBtc\BLL\bin\Debug\JY.BLL.pdb
+F:\CSharpCode\GitHub\MvcBtc\BLL\bin\Debug\JY.DAL.dll
+F:\CSharpCode\GitHub\MvcBtc\BLL\bin\Debug\JY.Model.dll
+F:\CSharpCode\GitHub\MvcBtc\BLL\bin\Debug\JY.DBUtility.dll
+F:\CSharpCode\GitHub\MvcBtc\BLL\bin\Debug\System.Data.SQLite.dll
+F:\CSharpCode\GitHub\MvcBtc\BLL\bin\Debug\MySql.Data.dll
+F:\CSharpCode\GitHub\MvcBtc\BLL\bin\Debug\JY.DAL.pdb
+F:\CSharpCode\GitHub\MvcBtc\BLL\bin\Debug\JY.Model.pdb
+F:\CSharpCode\GitHub\MvcBtc\BLL\bin\Debug\JY.DBUtility.pdb
+F:\CSharpCode\GitHub\MvcBtc\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+F:\CSharpCode\GitHub\MvcBtc\BLL\obj\Debug\JY.BLL.dll
+F:\CSharpCode\GitHub\MvcBtc\BLL\obj\Debug\JY.BLL.pdb

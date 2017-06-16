@@ -17,3 +17,8 @@ F:\CSharpCode\BtoCgwwz5\Model\bin\Debug\JY.Model.pdb
 F:\CSharpCode\BtoCgwwz5\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
 F:\CSharpCode\BtoCgwwz5\Model\obj\Debug\JY.Model.dll
 F:\CSharpCode\BtoCgwwz5\Model\obj\Debug\JY.Model.pdb
+F:\CSharpCode\GitHub\MvcBtc\Model\bin\Debug\JY.Model.dll
+F:\CSharpCode\GitHub\MvcBtc\Model\bin\Debug\JY.Model.pdb
+F:\CSharpCode\GitHub\MvcBtc\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+F:\CSharpCode\GitHub\MvcBtc\Model\obj\Debug\JY.Model.dll
+F:\CSharpCode\GitHub\MvcBtc\Model\obj\Debug\JY.Model.pdb

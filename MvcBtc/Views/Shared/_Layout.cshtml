@@ -1,59 +1,35 @@
 ﻿<!DOCTYPE html>
 <html lang="zh">
-    <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta charset="utf-8" />
-        <title>@ViewBag.Title - 我的 ASP.NET MVC 应用程序</title>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
-    </head>
-    <body>
-        <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("将你的徽标放置在此处", "Index", "Home")</p>
-                </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-
-                     
-
-                        @{
-                            Html.RenderPartial("~/Views/WebTemplate/Top.cshtml", new { parm = "my" });
-    }
-                    </section>
-                 
-                  
-                    
-                    
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("主页", "Index", "Home")</li>
-                            <li>@Html.ActionLink("关于", "About", "Home")</li>
-                            <li>@Html.ActionLink("联系方式", "Contact", "Home")</li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </header>
-        <div id="body">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - 我的 ASP.NET MVC 应用程序</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css/templatemo_style.css")
+    @Styles.Render("~/Content/css/nivo-slider.css")
+    @Styles.Render("~/Content/css/ddsmoothmenu.css")
+    @Scripts.Render("~/Scripts/js/jquery.min.js")
+    @Scripts.Render("~/Scripts/js/ddsmoothmenu.js")
+</head>
+<body>
+    <center>
+        <div id="templatemo_body_wrapper">
+            <div id="templatemo_wrapper">
+                <header>
+                    @{Html.RenderAction("Top", "WebTemplate");}
+                </header>
+                <div class="copyrights">Collect from <a href="http://sc.putaojiayuan.com/" title=""></a></div>
                 @RenderBody()
-            </section>
-        </div>
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - 我的 ASP.NET MVC 应用程序</p>
-                </div>
+                <footer>
+                    @{Html.RenderAction("Foot", "WebTemplate");}
+                </footer>
             </div>
-        </footer>
-
-        @Scripts.Render("~/bundles/jquery")
-        @RenderSection("scripts", required: false)
-    </body>
+            <!-- END of templatemo_wrapper -->
+        </div>
+        <!-- END of templatemo_body_wrapper -->
+    </center>
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
 </html>

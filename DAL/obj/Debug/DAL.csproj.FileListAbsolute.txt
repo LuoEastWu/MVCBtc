@@ -38,3 +38,13 @@ F:\CSharpCode\BtoCgwwz5\DAL\bin\Debug\JY.Model.pdb
 F:\CSharpCode\BtoCgwwz5\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
 F:\CSharpCode\BtoCgwwz5\DAL\obj\Debug\JY.DAL.dll
 F:\CSharpCode\BtoCgwwz5\DAL\obj\Debug\JY.DAL.pdb
+F:\CSharpCode\GitHub\MvcBtc\DAL\bin\Debug\JY.DAL.dll
+F:\CSharpCode\GitHub\MvcBtc\DAL\bin\Debug\JY.DAL.pdb
+F:\CSharpCode\GitHub\MvcBtc\DAL\bin\Debug\JY.DBUtility.dll
+F:\CSharpCode\GitHub\MvcBtc\DAL\bin\Debug\JY.Model.dll
+F:\CSharpCode\GitHub\MvcBtc\DAL\bin\Debug\System.Data.SQLite.dll
+F:\CSharpCode\GitHub\MvcBtc\DAL\bin\Debug\JY.DBUtility.pdb
+F:\CSharpCode\GitHub\MvcBtc\DAL\bin\Debug\JY.Model.pdb
+F:\CSharpCode\GitHub\MvcBtc\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+F:\CSharpCode\GitHub\MvcBtc\DAL\obj\Debug\JY.DAL.dll
+F:\CSharpCode\GitHub\MvcBtc\DAL\obj\Debug\JY.DAL.pdb
