@@ -9,21 +9,60 @@
         //customtheme: ["#1c5a80", "#18374a"],
         contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
     })
+    var timeout = 500;
+    var closetimer = 0;
+    var ddmenuitem = 0;
+    function mouseout(targetid) {
+        var target = document.getElementById(targetid);
+        if (target.style.display == "block") {
+            target.style.display = "none";
+            target.style.visibility = 'hidden'
 
+        } else {
+            target.style.display = "block";
+            target.style.visibility = 'visible'
+        }
+
+    }
+
+    function mclosetime(targetid) {
+        var target = document.getElementById(targetid);
+        target.style.display = "none";
+        target.style.visibility = 'hidden'
+    }
 </script>
+
+
 
 
 <div id="templatemo_header">
     <div id="site_title"><h1><a href="Index.aspx"><!--网上购物 --></a></h1></div>
     <div id="header_right">
         <p>
-            <asp:Panel runat="server" ID="pnlLogin">
-                <a href="Member/MemberInfo.aspx">我的账户</a> | <a href="Member/Collection.aspx">我的收藏</a> | <a href="Shoppingcart.aspx">我的购物车</a> | <a href="Member/Review.aspx">我的评论</a> | <a href="Login.aspx">登录</a> | <a href="Registration.aspx">注册</a>
+            @if (Request.IsAuthenticated)
+            {
+                  <asp:Panel runat="server" ID="pnlOutLogin" Visible="false">
+                <a href="Member/MemberInfo.aspx">我的账户</a> | 
+                      <a href="Member/Collection.aspx">我的收藏</a> | 
+                      <a href="Shoppingcart.aspx">我的购物车</a> | 
+                      <a href="Member/Review.aspx">我的评论</a> | 您好：<%=  Session["MemberName"] %> 
+                      <a href="javascript:document.getElementById('logoutForm').submit()">安全退出</a>
+                      
             </asp:Panel>
+            }
+            else
+            {
+              <asp:Panel runat="server" ID="pnlLogin">
+                <a href="Member/MemberInfo.aspx">我的账户</a> |
+                   <a href="Member/Collection.aspx">我的收藏</a> | 
+                  <a href="Shoppingcart.aspx">我的购物车</a> |
+                   <a href="Member/Review.aspx">我的评论</a> | 
+                  <a href="Login.aspx">登录</a> | <a href="Registration.aspx">注册</a>
+            </asp:Panel>
+            }
+         
 
-            <asp:Panel runat="server" ID="pnlOutLogin" Visible="false">
-                <a href="Member/MemberInfo.aspx">我的账户</a> | <a href="Member/Collection.aspx">我的收藏</a> | <a href="Shoppingcart.aspx">我的购物车</a> | <a href="Member/Review.aspx">我的评论</a> | 您好：<%=  Session["MemberName"] %> <asp:LinkButton ID="lbnTui" runat="server" onclick="lbnTuo_Click">安全退出</asp:LinkButton>
-            </asp:Panel>
+            
         </p>
     </div>
     <div class="cleaner"></div>
@@ -40,32 +79,33 @@
                     foreach (var ProductTypeList in (List<JY.Model.ProductType>)ViewData["ProductTypeList"])
                     {
                         <li>
-                            <a href='Products.aspx?ProductTypeId=@ProductTypeList.ID'>@ProductTypeList.TypeName</a>
-                            <ul>
+                            <a onmouseover=mouseout('showtext+'+@ProductTypeList.ID) onmouseout="mclosetime('showtext+'+@ProductTypeList.ID)" href=' products.aspx?producttypeid=@ProductTypeList.ID'>@ProductTypeList.TypeName</a>
+                            <ul id="showtext+@ProductTypeList.ID" onmouseout=mouseout('showtext+'+@ProductTypeList.ID)>
                                 @foreach (var rptProductType in MvcBtc.Controllers.WebTemplateController.rptProductType(ProductTypeList.ID))
                                 {
-                                    <li><a href='Products.aspx?ProductTypeId=@rptProductType.ID'>@rptProductType.TypeName</a></li>
+                                    <li><a id="showtext" href='Products.aspx?ProductTypeId=@rptProductType.ID'>@rptProductType.TypeName</a></li>
                                 }
                             </ul>
                         </li>
                     }
                 }
-
-                <asp:Repeater ID="rptInformationType" runat="server" OnItemDataBound="rptInformationType_ItemDataBound">
-                    <itemtemplate>
-                        <li>
-                            <a href='Information.aspx?InformationTypeId=<%#  Eval("Id") %>'><%#Eval("TypeName")%></a>
-                            <ul>
-                                <asp:Repeater ID="rptInformationChildType" runat="server">
-                                    <itemtemplate>
-                                        <li><a href='Information.aspx?InformationTypeId=<%#  Eval("Id") %>'><%#Eval("TypeName")%></a></li>
-                                    </itemtemplate>
-                                </asp:Repeater>
-                            </ul>
-                        </li>
-                    </itemtemplate>
-                </asp:Repeater>
+                @if (ViewData["InformationTypeList"] != null)
+                {
+                    foreach (var InformationTypeList in (ViewData["InformationTypeList"] as List<JY.Model.InformationType>)) 
+                    {
+                         <li>
+                             <a onmouseover=mouseout('news+'+@InformationTypeList.ID) onmouseout="mclosetime('news+'+@InformationTypeList.ID)" href='Information.aspx?InformationTypeId=@InformationTypeList.ID'>@InformationTypeList.TypeName</a>
+                             <ul id="news+@InformationTypeList.ID" onmouseout=mouseout('news+'+@InformationTypeList.ID)>
+                                 @foreach (var rptInformationType in MvcBtc.Controllers.WebTemplateController.rptInformationType(InformationTypeList.ID.ToString()))
+                                 {
+                                     <li><a id="news" href='Information.aspx?InformationTypeId=@rptInformationType.ID'>@rptInformationType.TypeName</a></li>
+                                 }
+                             </ul>
+                         </li>
+                    }
+                }
             </ul>
+
         </nav>
         <br style="clear: left" />
     </div> <!-- end of ddsmoothmenu -->

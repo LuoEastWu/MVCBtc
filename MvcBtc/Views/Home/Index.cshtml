@@ -4,15 +4,17 @@
     <div id="content" class="float_r">
         <div id="slider-wrapper">
             <div id="slider" class="nivoSlider">
-
-                <asp:Repeater runat="server" ID="rptAd">
-                    <itemtemplate>
-                        <a href="<%# Eval(" adverturl")=adverturl") %=%>
-                            " target="_blank">
-                            <img src="Admin/Upfile/<%# Eval(" advertpic")=advertpic") %=% />" width="680px" height="300px" alt="<%# Eval("AdvertName") %>" title="<%# Eval("AdvertName") %>" />
+                @if (ViewData["BindAd"] != null)
+                {
+                    foreach (var BindAd in (ViewData["BindAd"] as List<JY.Model.Advert>))
+                    {
+                        <a href="@BindAd.AdvertUrl " target="_blank">
+                            <img src="Admin/Upfile/@BindAd.AdvertPic /" width="680px" height="300px" alt="@BindAd.AdvertName " title="@BindAd.AdvertName" />
                         </a>
-                    </itemtemplate>
-                </asp:Repeater>
+                    }
+
+                }
+
             </div>
 
             <!--
@@ -30,20 +32,25 @@
             });
         </script>
         <h1>新品上市</h1>
-        <asp:Repeater ID="rptProductHot" runat="server">
-            <itemtemplate>
+        @if (ViewData["getProductHot"] != null)
+        {
+            foreach (var getProductHot in (ViewData["getProductHot"] as List<JY.Model.Product>))
+            {
                 <div class="product_box">
-                    <h3 style="text-align: center"><%# publicHandle.GetSubstring(Eval("ProductName").ToString(), 16, "...")%></h3>
-                    <a href='Productdetail.aspx?id=<%#Eval("Id") %>'>
-                        <img src="Admin/Upfile/<%#Eval(" productpic")=productpic") %=% />" alt="Shoes 1" style="width: 200px; height: 150px;" />
+                    <h3 style="text-align: center">@Collections.publicHandle.GetSubstring(getProductHot.ProductName, 16, "...")</h3>
+                    <a href='Productdetail.aspx?id=@getProductHot.ID'>
+                        <img src="Admin/Upfile/@getProductHot.ProductPic" alt="Shoes 1" style="width: 200px; height: 150px;" />
                     </a>
-                    <p class="product_price"><s>市场价：￥ <%#Eval("MarketPrice")%></s></p>
-                    <p class="product_price">本网站价：￥ <%#Eval("WebsitePrice")%></p>
+                    <p class="product_price"><s>市场价：￥ @getProductHot.MarketPrice</s></p>
+                    <p class="product_price">本网站价：￥ @getProductHot.WebsitePrice</p>
                     <a href='Shoppingcart.aspx?Productid=<%#Eval("Id") %>&num=1' class="addtocart"></a>
                     <a href='Productdetail.aspx?id=<%#Eval("Id") %>' class="detail"></a>
                 </div>
-            </itemtemplate>
-        </asp:Repeater>
+            }
+
+        }
+
+
         <div class="cleaner"></div>
 
     </div>
