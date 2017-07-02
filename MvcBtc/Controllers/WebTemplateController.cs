@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace MvcBtc.Controllers
 {
@@ -58,7 +60,6 @@ namespace MvcBtc.Controllers
             ViewData["ProductTypeList"] = Collections.DataToList.ToList<JY.Model.ProductType>(ptbll.GetListByPage(" IsDelete=0 and fid=0", " sort ", 0, 6).Tables[0]);
             JY.BLL.Product prbll = new JY.BLL.Product();
             ViewData["ProductList"] = Collections.DataToList.ToList<JY.Model.Product>(prbll.GetListByPage(" IsDelete=0", " sort", 0, 4).Tables[0]);
-
             return PartialView();
         }
         /// <summary>

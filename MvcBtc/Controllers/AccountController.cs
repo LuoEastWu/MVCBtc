@@ -10,6 +10,18 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using MvcBtc.Filters;
 using MvcBtc.Models;
+using Maticsoft.DBUtility;
+using System.Data;
+using System.Web.Security;
+using System.Web.Script.Serialization;
+using System.Runtime.Serialization.Json;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Soap;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+
+
 
 namespace MvcBtc.Controllers
 {
@@ -17,6 +29,15 @@ namespace MvcBtc.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        public ActionResult LogOut(string returnUrl)
+        {
+            bool dd = Request.IsAuthenticated;
+            if (Request.Cookies[FormsAuthentication.FormsCookieName] != null)
+            {
+                Response.Cookies[FormsAuthentication.FormsCookieName].Expires = DateTime.Now.AddDays(-1);
+            }
+            return RedirectToLocal("/Account/Login");
+        } 
         //
         // GET: /Account/Login
 
@@ -35,15 +56,54 @@ namespace MvcBtc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
-            {
-                return RedirectToLocal(returnUrl);
-            }
 
-            // 如果我们进行到这一步时某个地方出错，则重新显示表单
-            ModelState.AddModelError("", "提供的用户名或密码不正确。");
+            try
+            {
+                EnCode encode = new EnCode();
+                string strMemberName = model.UserName.Trim();
+                string strPassword = encode.md5(model.Password);
+
+                JY.BLL.Member bll = new JY.BLL.Member();
+                string strSql = " MemberName='" + strMemberName + "' and Password='" + strPassword + "' and isdelete=0";
+
+                DataTable dt = bll.GetList(strSql).Tables[0];
+                if (dt.Rows.Count > 0)
+                {
+                    Session["MemberID"] = dt.Rows[0]["ID"].ToString();
+                    Session["MemberName"] = dt.Rows[0]["MemberName"].ToString();
+                    Session["MemberRankId"] = dt.Rows[0]["MemberRankId"].ToString();
+
+                    if (Request.QueryString["url"] != null && Request.QueryString["url"] != "")
+                    {
+                        Response.Redirect(Server.UrlDecode(Request.QueryString["url"]));
+                    }
+                    else
+                    {
+
+                        string UserData = Collections.JsonHelper.JsonSerializer<LoginModel>(model);//序列化用户实体
+                        //保存身份信息，参数说明可以看提示
+                        FormsAuthenticationTicket Ticket = new FormsAuthenticationTicket(1, strMemberName, DateTime.Now, DateTime.Now.AddHours(12), false, UserData);
+                        HttpCookie Cookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(Ticket));//加密身份信息，保存至Cookie
+                        Response.Cookies.Add(Cookie);
+                       
+                        return RedirectToLocal(returnUrl);
+                    }
+
+                }
+                else
+                {
+                    // 如果我们进行到这一步时某个地方出错，则重新显示表单
+                    ModelState.AddModelError("", "用户名或密码不正确，请重新输入！");
+                }
+            }
+            catch (Exception er)
+            {
+                // 如果我们进行到这一步时某个地方出错，则重新显示表单
+                ModelState.AddModelError("", er.Message);
+            }
             return View(model);
         }
+    
 
         //
         // POST: /Account/LogOff
@@ -107,7 +167,7 @@ namespace MvcBtc.Controllers
             if (ownerAccount == User.Identity.Name)
             {
                 // 使用事务来防止用户删除其上次使用的登录凭据
-                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.Serializable }))
+                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = System.Transactions.IsolationLevel.Serializable }))
                 {
                     bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
                     if (hasLocalAccount || OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name).Count > 1)

@@ -45,8 +45,9 @@
                 <a href="Member/MemberInfo.aspx">我的账户</a> | 
                       <a href="Member/Collection.aspx">我的收藏</a> | 
                       <a href="Shoppingcart.aspx">我的购物车</a> | 
-                      <a href="Member/Review.aspx">我的评论</a> | 您好：<%=  Session["MemberName"] %> 
-                      <a href="javascript:document.getElementById('logoutForm').submit()">安全退出</a>
+                      <a href="Member/Review.aspx">我的评论</a> | 您好：@Session["MemberName"] 
+                      @Html.ActionLink("安全退出", "LogOut", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+         
                       
             </asp:Panel>
             }
@@ -57,7 +58,8 @@
                    <a href="Member/Collection.aspx">我的收藏</a> | 
                   <a href="Shoppingcart.aspx">我的购物车</a> |
                    <a href="Member/Review.aspx">我的评论</a> | 
-                  <a href="Login.aspx">登录</a> | <a href="Registration.aspx">注册</a>
+                  @Html.ActionLink("登录", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) | 
+                 @Html.ActionLink("注册", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
             </asp:Panel>
             }
          

@@ -4,46 +4,45 @@
     ViewBag.Title = "登录";
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-</hgroup>
 
-<section id="loginForm">
-<h2>使用本地帐户登录。</h2>
-@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+<div id="templatemo_main">
+    @{Html.RenderAction("Left", "WebTemplate");}
 
-    <fieldset>
-        <legend>“登录”表单</legend>
-        <ol>
-            <li>
+    @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div id="content" class="float_r">
+            <h2 style="text-align:left">登录</h2>
+            <div class="content_half float_l checkout">
                 @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName, new { @style = "width:300px", @ID = "txtMemberName", ErrorMessage = "请输入会员名！" ,ToolTip="请输入会员名！"})
                 @Html.ValidationMessageFor(m => m.UserName)
-            </li>
-            <li>
+                <br />
+                <br />
                 @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password, new {@TextMode="Password" ,@style="width:300px;" })
                 @Html.ValidationMessageFor(m => m.Password)
-            </li>
-            <li>
+                <br />
+                <br />
                 @Html.CheckBoxFor(m => m.RememberMe)
                 @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
-            </li>
-        </ol>
-        <input type="submit" value="登录" />
-    </fieldset>
-    <p>
-        @Html.ActionLink("注册", "Register") 如果你没有帐户。
-    </p>
-}
-</section>
+                <br />
+                <input type="submit" value="登录" id="btnLogin" class="height=25px,width=75px" />
+              
+                <a href="javascript:location.href='Registration.aspx'"><img src="images/btn_Registration.jpg" alt="" height="25px" width="75px" style="vertical-align:middle" /></a>
+            </div>
 
-<section class="social" id="socialLoginForm">
-    <h2>使用其他服务登录。</h2>
-    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-</section>
+        </div>
+
+        <div class="cleaner"></div>
+    }
+</div> <!-- END of templatemo_main -->
+
+
+
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
